@@ -1,52 +1,28 @@
 # https://levelup.gitconnected.com/how-to-deploy-a-python-flask-api-on-heroku-2e5ddfd943ef
 from flask import Flask, request, jsonify
+from data import elo_ranking
 app = Flask(__name__)
 
-
-@app.route('/getmsg/', methods=['GET'])
-def respond():
-    # Retrieve the name from the url parameter /getmsg/?name=
-    name = request.args.get("name", None)
-
-    # For debugging
-    print(f"Received: {name}")
-
-    response = {}
-
-    # Check if the user sent a name at all
-    if not name:
-        response["ERROR"] = "No name found. Please send a name."
-    # Check if the user entered a number
-    elif str(name).isdigit():
-        response["ERROR"] = "The name can't be numeric. Please send a string."
-    else:
-        response["MESSAGE"] = f"Welcome {name} to our awesome API!"
-
-    # Return the response in json format
-    return jsonify(response)
-
-
-@app.route('/post/', methods=['POST'])
-def post_something():
-    param = request.form.get('name')
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
+@app.route('/tip', methods=['POST'])
+def tip():
+    data = request.get_json()
+    print(data)
+    if 'round' in data and 'match' in data and 'team1' in data and 'team2' in data and 'results' in data:
+        print(elo_ranking(data['team1']))
+        print(elo_ranking(data['team2']))
         return jsonify({
-            "Message": f"Welcome {name} to our awesome API!",
-            # Add this option to distinct the POST request
-            "METHOD": "POST"
+            'winner': "Australia"
         })
     else:
         return jsonify({
-            "ERROR": "No name found. Please send a name."
+            "ERROR": "Invalid POST"
         })
 
 
-@app.route('/')
+@app.route('/',)
 def index():
     # A welcome message to test our server
-    return "<h1>Welcome to our medium-greeting-api!</h1>"
+    return "Welcome to Matt's horrible World Cup tipping service."
 
 
 if __name__ == '__main__':
