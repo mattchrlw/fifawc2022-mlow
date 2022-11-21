@@ -78,7 +78,7 @@ FIFA_RANKINGS = [
     },
     {
         "rank": 16,
-        "name": "USA",
+        "name": "United States",
         "points": 1627.48
     },
     {
@@ -98,7 +98,7 @@ FIFA_RANKINGS = [
     },
     {
         "rank": 20,
-        "name": "IR Iran",
+        "name": "Iran",
         "points": 1564.61
     },
     {
@@ -138,7 +138,7 @@ FIFA_RANKINGS = [
     },
     {
         "rank": 28,
-        "name": "Korea Republic",
+        "name": "South Korea",
         "points": 1530.3
     },
     {
